@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 const db = {
 	users: [
 		{
-			id: '12345',
+			id: '1',
 			name: 'Tom',
 			email: 'tom@email.com',
 			password: 'abcde',
@@ -17,7 +17,7 @@ const db = {
 			joined: new Date()
 		},
 		{
-			id: '23435',
+			id: '2',
 			name: 'Bob',
 			email: 'bob@email.com',
 			password: '123456',
@@ -50,6 +50,35 @@ app.post('/register', (req, res) => {
 		joined: new Date()
 	});
 	res.json(db.users[db.users.length-1]);
+});
+
+app.get('/profile/:id', (req, res) =>{
+	const {id} = req.params;
+	let foundUser = false;
+	db.users.forEach(user => {
+		if (user.id === id) {
+			foundUser = true;
+			return res.json(user);
+		} 		
+	});
+	if (!foundUser) {
+			res.status(404).json('user not found');
+		}
+});
+
+app.put('/image', (req, res) => {
+	const {id} = req.body;
+	let foundUser = false;
+	db.users.forEach(user => {
+		if (user.id === id) {
+			foundUser = true;
+			user.entries++;
+			return res.json(user.entries);
+		} 		
+	});
+	if (!foundUser) {
+			res.status(404).json('user not found');
+		}
 });
 
 app.listen(PORT, () => {
