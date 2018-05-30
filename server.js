@@ -6,6 +6,21 @@ const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
+const knex = require('knex')({
+  client: 'pg',
+  connection: {
+    host : '127.0.0.1',
+    user : 'postgres',
+    // NEED TO INSERT PW
+    password : '',
+    database : 'face_recognition'
+  }
+});
+
+knex.select('*').from('users').then(data => {
+	console.log(data);
+});
+
 const db = {
 	users: [
 		{
@@ -44,14 +59,11 @@ app.post('/signin', (req, res) => {
 
 app.post('/register', (req, res) => {
 	const { email, name, password } = req.body;
-
-	db.users.push({
-		id: '32423',
-		name: name,
+	knex('users').insert({
 		email: email,
-		entries: 0,
+		name: name,
 		joined: new Date()
-	});
+	}).then(console.log);
 	res.json(db.users[db.users.length-1]);
 });
 
