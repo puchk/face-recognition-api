@@ -12,7 +12,7 @@ const knex = require('knex')({
     host : '127.0.0.1',
     user : 'postgres',
     // NEED TO INSERT PW
-    password : '',
+    password : 'Tom$8Loans90',
     database : 'face_recognition'
   }
 });
@@ -59,12 +59,16 @@ app.post('/signin', (req, res) => {
 
 app.post('/register', (req, res) => {
 	const { email, name, password } = req.body;
-	knex('users').insert({
-		email: email,
-		name: name,
-		joined: new Date()
-	}).then(console.log);
-	res.json(db.users[db.users.length-1]);
+	knex('users')
+		.returning('*')
+		.insert({
+			email: email,
+			name: name,
+			joined: new Date()
+		}).then(response => {
+			res.json(response[0]);
+		})
+		.catch(err => res.status(400).json(err));
 });
 
 app.get('/profile/:id', (req, res) =>{
@@ -73,7 +77,7 @@ app.get('/profile/:id', (req, res) =>{
 	db.users.forEach(user => {
 		if (user.id === id) {
 			foundUser = true;
-			return res.json(user);
+			return res.json('error');
 		} 		
 	});
 	if (!foundUser) {
