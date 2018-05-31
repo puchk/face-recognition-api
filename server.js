@@ -12,7 +12,7 @@ const knex = require('knex')({
     host : '127.0.0.1',
     user : 'postgres',
     // NEED TO INSERT PW
-    password : 'Tom$8Loans90',
+    password : '',
     database : 'face_recognition'
   }
 });
