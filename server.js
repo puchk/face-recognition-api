@@ -9,7 +9,7 @@ const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
 const app = express();
-const PORT = 3000;
+const PORT = PROCESS.ENV.PORT || 3000;
 
 const knex = require('knex')({
   client: 'pg',
@@ -17,7 +17,7 @@ const knex = require('knex')({
     host : '127.0.0.1',
     user : 'postgres',
     // NEED TO INSERT PW
-    password : '',
+    password : 'Tom$8Loans90',
     database : 'face_recognition'
   }
 });
