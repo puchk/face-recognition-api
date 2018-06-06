@@ -9,7 +9,7 @@ const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
 const app = express();
-const PORT = PROCESS.ENV.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 const knex = require('knex')({
   client: 'pg',
