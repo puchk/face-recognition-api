@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
+    host : 'postgresql-cubed-97002',
     user : 'postgres',
     // NEED TO INSERT PW
     password : 'Tom$8Loans90',
@@ -51,5 +51,5 @@ bcrypt.compare("veggies", hash, function(err, res) {
 });*/
 
 app.listen(PORT, () => {
-	console.log(`Running on Port ${PORT}`);
+  console.log(`Server is listening on port ${PORT}`);
 });
