@@ -14,11 +14,8 @@ const PORT = process.env.PORT || 3000;
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    host : 'postgresql-cubed-97002',
-    user : 'postgres',
-    // NEED TO INSERT PW
-    password : 'Tom$8Loans90',
-    database : 'face_recognition'
+    host : process.env.DATABASE_URL,
+    ssl: true
   }
 });
 
